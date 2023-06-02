@@ -115,6 +115,10 @@ class ProductController extends Controller
             'image.mimes' => 'Kolom gambar harus memiliki format file jpeg, png, atau jpg.',
             'image.max' => 'Ukuran file gambar tidak boleh melebihi 2MB.',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
         // cek jika user mengupload gambar di form
         if ($request->hasFile('image')) {
             // ambil nama file gambar lama dari database
